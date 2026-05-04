@@ -4,7 +4,7 @@ import os
 
 mcp = FastMCP("369Management - Systeme.io")
 
-API_KEY = os.environ.get("SYSTEMEIO_API_KEY", "7lxs70h8xs23wnumucqls0sedbdxn40cjbqclxs67myr91obvmik5iye1bma179e")
+API_KEY = os.environ.get("SYSTEMEIO_API_KEY")
 BASE_URL = "https://api.systeme.io/api"
 HEADERS  = {"X-API-Key": API_KEY, "Content-Type": "application/json"}
 
@@ -38,4 +38,5 @@ async def lister_contacts():
         return r.json()
 
 if __name__ == "__main__":
-    mcp.run(transport="sse", host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    mcp.run(transport="sse", host="0.0.0.0", port=port)
